@@ -125,6 +125,27 @@
     width: 90%;
     border-radius: 25px;
   }
+
+.icone-journal {
+  top: -30px;
+}
+
+.icone-loupe {
+  top: -40px;
+}
+
+.icone-on-air {
+  top: -60px;
+}
+
+  /* Sur mobile, le projecteur passe au-dessus de la carte, à droite */
+  /* .quoi .icone-projecteur {
+    top: 10px;
+    left: auto;     
+    right: -40px;
+    width: 150px;
+  } */
+
 }
 
 
@@ -172,4 +193,9 @@
   .quoi {
     overflow-x: clip;
   }
+    .quoi .icone-projecteur {
+        top: -20px;
+    left: -35px;   /* ← plus négatif = plus à gauche */
+  }
+  
 }
