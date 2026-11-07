@@ -1,0 +1,136 @@
+/* =========================================================
+   ACCOMPAGNEMENT.CSS
+   ========================================================= */
+
+.accompagnement {
+  position: relative; /* repère pour placer l'ampoule */
+  justify-content: flex-start; /* annule le centrage du main de base */
+  min-height: 60vh;
+  padding: 40px 0 0 19%;
+}
+
+/* ===== L'accroche ===== */
+.accroche {
+  position: relative;
+  z-index: 1; /* le texte passe DEVANT l'ampoule */
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-weight: normal;
+  line-height: 1;
+  max-width: 8em; /* contrôle les retours à la ligne */
+  /* parallax, en sens inverse */
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+/* ===== L'ampoule (bouton qui ouvre la modale) ===== */
+.ampoule {
+  position: absolute;
+  right: 17%;
+  bottom: -15%;
+  rotate: 12deg;
+  width: clamp(300px, 45vw, 700px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.ampoule img {
+  width: 100%;
+  display: block;
+}
+
+/* La vibration (utilisée au survol) */
+@keyframes vibrer {
+  0%,
+  100% {
+    rotate: 12deg;
+  }
+  25% {
+    rotate: 8deg;
+  }
+  75% {
+    rotate: 16deg;
+  }
+}
+
+/* Survol : seulement avec une vraie souris (évite le "hover collant" sur mobile) */
+@media (hover: hover) {
+  .ampoule:hover,
+  .ampoule:focus-visible {
+    scale: 1.08;
+    animation: vibrer 0.4s ease-in-out infinite;
+  }
+}
+
+/* Écrans tactiles : 2 petites vibrations pour dire "touche-moi" */
+@keyframes appel-ampoule {
+  0%,
+  20%,
+  100% {
+    rotate: 12deg;
+  }
+  5% {
+    rotate: 8deg;
+  }
+  10% {
+    rotate: 16deg;
+  }
+  15% {
+    rotate: 8deg;
+  }
+}
+
+@media (hover: none) {
+  .ampoule {
+    animation: appel-ampoule 3s ease-in-out 1s 2; /* attend 1 s, vibre 2 fois */
+  }
+}
+
+/* Moins d'animations demandé : on coupe tout */
+@media (prefers-reduced-motion: reduce) {
+  .ampoule,
+  .ampoule:hover,
+  .ampoule:focus-visible {
+    animation: none;
+  }
+}
+
+/* ===== RESPONSIVE : accompagnement ===== */
+@media (max-width: 900px) {
+  .accompagnement {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    padding: 30px 8% 100px; /* même marge à gauche et à droite */
+    overflow-x: clip;
+  }
+
+  /* L'ampoule passe sous le texte : plus de risque de chevauchement */
+  .ampoule {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(420px, 85vw);
+  }
+
+  /* La modale prend presque tout l'écran */
+  .modale {
+    top: 90px;
+    left: 5%;
+    width: 90%;
+    height: calc(100vh - 150px);
+    padding: 25px 20px;
+  }
+
+  .modale-titre {
+    font-size: 1.6rem;
+    padding: 0 30px; /* le titre ne passe pas sous la croix */
+  }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gochi+Hand&display=swap" rel="stylesheet">
+    <title>Take Five – Studio de coaching</title>
+    <link rel="stylesheet" href="css/commun.css">
+    <link rel="stylesheet" href="css/accompagnement.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+
+    <!-- HAUT : logo + menu + bouton contact -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Take Five – accueil">
+        </a>
+
+        <nav class="nav" id="menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="accompagnement.html" class="active">L'accompagnement</a></li>
+                <li><a href="qui-suis-je.html">Qui suis-je</a></li>
+                <li class="nav-contact"><a href="contact.html" class="btn-contact">contact</a></li>
+                <!-- <li><a href="temps-lies.html">Temps liés</a></li> -->
+            </ul>
+        </nav>
+
+        <a href="contact.html" class="btn-contact">contact</a>
+
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main class="accompagnement">
+        <h1 class="accroche">
+            " Prenez le temps dont vous avez besoin et la place qui est la vôtre."
+        </h1>
+
+        <button class="ampoule" aria-label="Découvrir l'accompagnement">
+            <img src="images/on.png" alt="">
+        </button>
+    </main>
+
+    <dialog id="modale-coaching" class="modale">
+        <button class="modale-fermer" aria-label="Fermer">×</button>
+
+        <h2 class="modale-titre">Mais qu'est-ce que le coaching ?</h2>
+
+        <div class="modale-texte">
+            <!-- nos <p> et notre <ul>, sans le <h2> -->
+            <p>Dans les livres, le coaching est « un processus d'accompagnement personnalisé et structuré, fondé sur un
+                partenariat entre un coach et un client, qui vise à développer son potentiel et à atteindre des
+                objectifs précis. »</p>
+
+            <p>Dans la vie, c'est effectivement exactement ça, et même encore un peu plus… C'est :</p>
+
+            <ul>
+                <li> la connexion qui se crée dans la relation d'accompagnement, installe la confiance et offre le
+                    soutien nécessaire tout au long du travail</li>
+                <li> une écoute active et empathique</li>
+                <li> l'accueil de ce qui se présente, sans aucun jugement</li>
+                <li> une conviction solide et ancrée que chacun peut atteindre ses objectifs quels qu'ils soient</li>
+                <li> des outils tangibles issus de la programmation neuro-linguistique, la communication non-violente,
+                    l'analyse transactionnelle…</li>
+                <li> l'art du questionnement qui fait « tilt »</li>
+                <li> un parcours qui vous (re)met au contact de ressources que vous avez déjà, de vos valeurs, de
+                    votre identité</li>
+                <li> une dynamique de mise en mouvement et de transformation</li>
+                <li> c'est aussi parfois découvrir des parts de soi qu'on ne soupçonnait pas.</li>
+            </ul>
+
+            <p>
+                C'est un temps qui part de vous, et pour vous.<br>
+                Stimulant et structurant (comme chez l'ostéo mais c'est vous qui alignez les vertèbres et libérez
+                l'amplitude des articulations ).<br>
+                Qui permet de vous (re)connaître, (re)mettre du mouvement.<br>
+                D'ouvrir l'espace et le choix des solutions.<br>
+                Et d'être, simplement, depuis votre juste place.<br>
+                Ici, chez vous, au studio, au bureau, à l'atelier, sur un plateau, dans une loge, un ascenseur… et même
+                chez le coiffeur (pour la rime 😉).
+            </p>
+
+            <p>Ce n'est pas un Abracadabra <br>C'est un « Eurêka » !</p>
+
+            <p>J'ouvre mon agenda à la fin du mois pour débuter les accompagnements en janvier. D'ici là, si vous vous
+                questionnez, n'hésitez pas à me contacter en MP et nous pourrons en discuter </p>
+
+            <p>À bientôt,</p>
+            <p class="signature">Alexandra Bannelier</p>
+        </div>
+        </div>
+    </dialog>
+
+
+    <!-- BAS : réseaux sociaux -->
+    <footer class="footer">
+        <a href="https://www.instagram.com/alexandra_bannelier/" target="_blank"><img src="images/instagram.png"
+                alt="Instagram"></a>
+        <a href="https://www.linkedin.com/in/alexandra-bannelier-7628196/" target="_blank"><img
+                src="images/linkedin.png" alt="LinkedIn"></a>
+        <a href="mailto:bonjour@takefivecoaching.fr" class="lien-mail">
+        <img src="images/mail.png" alt="Envoyer un e-mail" class="mail">
+        <span class="bulle">bonjour@takefivecoaching.fr</span>
+        </a>
+    </footer>
+
+    <!-- Décoration : le vinyle en bas à droite -->
+    <img src="images/vinyle.png" class="vinyle" alt="">
+
+    <script src="script/menu.js"></script>
+    <script src="script/parallax.js"></script>
+    <script src="script/accompagnement.js"></script>
+</body>
+
+</html>

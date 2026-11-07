@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gochi+Hand&display=swap" rel="stylesheet">
+    <title>Take Five – Studio de coaching</title>
+    <link rel="stylesheet" href="css/commun.css">
+<link rel="stylesheet" href="css/qui-suis-je.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+
+ <header class="header">
+  <a href="index.html" class="logo">
+    <img src="images/logo.png" alt="Take Five – accueil">
+  </a>
+
+  <nav class="nav" id="menu">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="accompagnement.html">L'accompagnement</a></li>
+      <li><a href="qui-suis-je.html" class="active">Qui suis-je</a></li>
+      <!-- <li><a href="temps-lies.html">Temps liés</a></li> -->
+      <li class="nav-contact"><a href="contact.html" class="btn-contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <a href="contact.html" class="btn-contact">contact</a>
+
+  <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+ 
+    <main class="qui-suis-je">
+        <h1 class="sr-only">Qui suis-je ?</h1>
+
+        <!-- <img src="images/alex.png" class="tele"
+       alt="Portrait d'Alexandra Bannelier dans une télévision vintage"> -->
+        <button class="tele" aria-label="Découvrir qui je suis">
+            <img src="images/alex.png" alt="Portrait d'Alexandra Bannelier dans une télévision vintage">
+        </button>
+
+        <figure class="citation">
+            <blockquote>« Découvrez qui vous êtes et assumez-le pleinement. »</blockquote>
+            <figcaption>Dolly Parton</figcaption>
+        </figure>
+    </main>
+    <dialog id="modale-qui" class="modale modale--droite">
+        <button class="modale-fermer" aria-label="Fermer">×</button>
+
+        <h2 class="modale-titre">Qui suis-je ?</h2>
+
+        <div class="modale-texte">
+            <p>Après près de 15 ans d'expérience au sein d'Universal Music et 8 ans dédiés à la pédagogie et à
+                l'enseignement, j'ai fondé Take Five : un studio de coaching professionnel pour les artistes et leur
+                entourage exécutif (labels, managers, éditeurs).</p>
+
+            <p>Pour moi, le coaching est la suite logique de ce parcours. C'est l'alliance parfaite entre la réalité du
+                terrain musical et l'art de la transmission.</p>
+
+            <p>Dans une industrie en constante mutation, ma conviction est entière : la création et le beau ne peuvent
+                se déployer sans un cadre de confiance absolue et une attention rigoureuse portée à l'humain.</p>
+
+            <p>Mon approche est stimulante et structurante. Comme chez l'ostéo, mais c'est vous qui alignez les
+                vertèbres et libérez l'amplitude de vos articulations.</p>
+
+            <p>Ce n'est pas un Abracadabra 🪄 C'est pleinement un « Eurêka » !</p>
+            <p>Alexandra</p>
+        </div>
+    </dialog>
+
+    <!-- BAS : réseaux sociaux -->
+    <footer class="footer">
+        <a href="https://www.instagram.com/alexandra_bannelier/" target="_blank"><img src="images/instagram.png"
+                alt="Instagram"></a>
+        <a href="https://www.linkedin.com/in/alexandra-bannelier-7628196/" target="_blank"><img
+                src="images/linkedin.png" alt="LinkedIn"></a>
+        <!-- <a href="mailto:adresse@exemple.fr"><img src="images/mail.png" class="mail" alt="Envoyer un e-mail"></a> -->
+       <a href="mailto:bonjour@takefivecoaching.fr" class="lien-mail">
+            <img src="images/mail.png" alt="Envoyer un e-mail" class="mail">
+            <span class="bulle">bonjour@takefivecoaching.fr</span>
+        </a>
+    </footer>
+
+    <!-- Décoration : le vinyle en bas à droite -->
+    <img src="images/vinyle.png" class="vinyle" alt="">
+
+    <script src="script/menu.js"></script>
+     <script src="script/parallax.js"></script>
+      <script src="script/Qui-sui-je.js"></script>
+</body>
+
+</html>

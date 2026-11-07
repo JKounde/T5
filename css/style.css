@@ -1,0 +1,735 @@
+/* ===== 1. Nos couleurs (variables) ===== */
+:root {
+  --jaune: #f7e16b;
+  --rose: #d94c6e;
+  --noir: #111;
+}
+
+/* ===== 2. Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--jaune);
+  font-family: "Gochi Hand", cursive;
+  color: var(--noir);
+}
+
+/* ===== 3. Header : logo | menu | contact ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 50px;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav a {
+  color: var(--noir);
+  text-decoration: none;
+  font-size: 1.6rem;
+  /* padding-bottom: 2px; */
+}
+
+.nav a.active,
+.nav a:hover {
+  border-bottom: 2px solid var(--rose);
+}
+/* ===== Bouton contact ===== */
+
+/* ===== Bouton contact ===== */
+
+/* 1. État normal */
+.btn-contact {
+  position: relative;
+  overflow: hidden;
+  color: rgb(244, 213, 218);
+  text-decoration: none;
+  font-size: 1.6rem;
+  padding: 12px 60px;
+  border: 2px solid #e0557f;
+  border-radius: 12px;
+  background:
+    /* lueur violette en bas au centre */
+    radial-gradient(
+      ellipse 40% 35% at 50% 100%,
+      rgba(230, 120, 255, 0.9),
+      transparent
+    ),
+    /* dégradé rose du haut vers le bas */
+    linear-gradient(to bottom, #f78fb0, #ee6a98 45%, #e8336b 85%, #f06aa0);
+  box-shadow: 0 6px 0 #a8324f; /* épaisseur pour l'effet "appui" */
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+/* 2. Reflet "pilule" en haut */
+.btn-contact::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4%;
+  right: 4%;
+  height: 42%;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.15)
+  );
+  pointer-events: none;
+}
+
+/* 3. Au clic : le bouton s'enfonce */
+.btn-contact:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #a8324f;
+}
+/* ===== 4. Bannière centrée ===== */
+main {
+  display: flex;
+  justify-content: center;
+  padding: 0px 20px;
+}
+
+.banniere {
+  width: 65%;
+  max-width: 1150px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 11px 0px rgba(128, 128, 128, 0.463);
+}
+
+/* ===== 5. Icônes en bas à gauche ===== */
+.footer {
+  position: fixed;
+  bottom: 30px;
+  left: 50px;
+  display: flex;
+  /* gap: 30px; */
+}
+
+.footer a {
+  display: block;
+}
+
+.footer img {
+  display: block;
+  width: 45px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.footer a:hover img,
+.footer a:focus-visible img {
+  transform: translateY(-6px) scale(1.15);
+}
+
+.footer .mail {
+  padding-top: 5px;
+  width: 40px;
+}
+
+/* ===== 6. Vinyle qui dépasse en bas à droite ===== */
+.vinyle {
+  position: fixed;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+}
+
+/* ===== 7. Le vinyle tourne ===== */
+@keyframes tourner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyle {
+  animation: tourner 6s linear infinite;
+}
+
+/* Si la personne a demandé moins d'animations dans son système */
+@media (prefers-reduced-motion: reduce) {
+  .vinyle {
+    animation: none;
+  }
+}
+/* ===== Bulle avec l'adresse mail ===== */
+.lien-mail {
+  position: relative; /* la bulle se place par rapport au lien */
+}
+
+.bulle {
+  position: absolute;
+  bottom: 120%; /* au-dessus de l'icône */
+  left: 0;
+  background: white;
+  color: var(--noir);
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap; /* l'adresse reste sur une seule ligne */
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
+}
+
+.lien-mail:hover .bulle,
+.lien-mail:focus-visible .bulle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Page Accompagnement ===== */
+.accompagnement {
+  position: relative; /* repère pour placer l'ampoule */
+  justify-content: flex-start; /* annule le centrage du main de l'accueil */
+  min-height: 60vh;
+  padding: 40px 0 0 19%;
+}
+
+.accroche {
+  position: relative;
+  z-index: 1; /* le texte passe DEVANT l'ampoule */
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-weight: normal;
+  line-height: 1;
+  max-width: 8em; /* contrôle les retours à la ligne */
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+.ampoule {
+  position: absolute;
+  right: 17%;
+  bottom: -15%;
+  rotate: 12deg;
+  width: clamp(300px, 45vw, 700px);
+  rotate: 12deg;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.ampoule img {
+  width: 100%;
+  display: block;
+}
+
+/* Au survol : elle grossit et vibre */
+@keyframes vibrer {
+  0%,
+  100% {
+    rotate: 12deg;
+  }
+  25% {
+    rotate: 8deg;
+  }
+  75% {
+    rotate: 16deg;
+  }
+}
+
+.ampoule:hover,
+.ampoule:focus-visible {
+  scale: 1.08;
+  animation: vibrer 0.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ampoule:hover,
+  .ampoule:focus-visible {
+    animation: none; /* elle grossit, mais ne vibre pas */
+  }
+}
+
+/* ===== Modale coaching ===== */
+
+.modale {
+  top: 120px; /* sous le header */
+  left: 14%;
+  margin: 0; /* annule le centrage par défaut de <dialog> */
+  width: min(680px, 46vw);
+  height: calc(100vh - 190px);
+  max-width: none;
+  max-height: none;
+  padding: 35px 40px;
+  border: 1.5px solid var(--rose);
+  border-radius: 16px;
+  background: var(--jaune); /* opaque : cache l'accroche */
+  color: var(--noir);
+  box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* display seulement quand elle est ouverte ! */
+.modale[open] {
+  display: flex;
+  flex-direction: column;
+  animation: apparition 0.4s ease;
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.modale::backdrop {
+  background: transparent; /* on voit la page derrière */
+}
+
+.modale-titre {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: normal;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Seul le texte défile */
+.modale-texte {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.modale-texte p,
+.modale-texte ul {
+  margin-bottom: 1.2em;
+}
+
+.modale-texte ul {
+  list-style: none;
+}
+
+/* Bouton fermer */
+.modale-fermer {
+  position: absolute; /* dans le coin de la carte */
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--noir);
+  transition: rotate 0.3s ease;
+}
+
+.modale-fermer:hover {
+  rotate: 90deg;
+}
+
+/* ===== Page Qui suis-je ===== */
+
+.qui-suis-je {
+  display: flex;
+  justify-content: center; /* télé + texte regroupés au centre */
+  align-items: center;
+  padding: 0 3% 40px;
+}
+
+.tele {
+  width: clamp(300px, 40vw, 600px);
+  margin-top: -60px;
+  margin-right: -55px;
+  rotate: -4deg;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  /* transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform; */
+  position: relative; /* z-index a besoin d'un position */
+  z-index: 20; /* plus grand que la modale : la télé passe devant */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.tele img {
+  width: 100%;
+  display: block;
+}
+
+.citation {
+  max-width: 600px;
+  text-align: center;
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+/* Vibration autour de -4deg */
+@keyframes vibrer-tele {
+  0%,
+  100% {
+    rotate: -4deg;
+  }
+  25% {
+    rotate: -8deg;
+  }
+  75% {
+    rotate: 0deg;
+  }
+}
+
+.tele:hover,
+.tele:focus-visible {
+  scale: 1.06;
+  animation: vibrer-tele 0.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tele:hover,
+  .tele:focus-visible {
+    animation: none;
+  }
+}
+
+.citation blockquote {
+  color: var(--rose);
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  line-height: 1.4;
+}
+
+.citation figcaption {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  margin-top: 20px;
+}
+
+/* Texte invisible à l'écran, mais lu par Google et les lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.modale--droite {
+  position: fixed; /* reste à sa place même si on scrolle */
+  z-index: 10;
+  left: auto; /* annule le left: 14% */
+  right: 5%;
+  top: 150px;
+  width: min(730px, 48vw);
+  height: auto; /* la hauteur suit le contenu */
+  max-height: calc(100vh - 220px); /* mais ne dépasse jamais l'écran */
+  padding: 50px 35px 30px;
+  overflow: visible; /* sinon le titre sur la bordure serait coupé */
+}
+
+/* Titre posé sur la bordure */
+.modale--droite .modale-titre {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0 15px;
+  background: var(--jaune); /* cache la bordure derrière lui */
+  font-size: 2.6rem;
+  white-space: nowrap;
+}
+.modale--droite .modale-texte {
+  min-height: 0; /* permet au texte de défiler si besoin */
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* ===== Page Contact ===== */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 3% 60px;
+}
+
+.contact-titre {
+  font-size: clamp(0.5rem, 2.5vw, 4rem);
+  font-weight: normal;
+  line-height: 1.1;
+  rotate: -8deg;
+  margin-bottom: 10px;
+  margin-left: 120px;
+}
+
+/* .telephone {
+  display: block;
+  width: clamp(300px, 35vw, 520px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+} */
+.telephone {
+  display: block;
+  width: clamp(300px, 35vw, 520px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+/* Le téléphone "sonne" au survol */
+@keyframes sonner {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -3deg;
+  }
+  75% {
+    rotate: 3deg;
+  }
+}
+
+.telephone:hover,
+.telephone:focus-visible {
+  scale: 1.05;
+  animation: sonner 0.15s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telephone:hover,
+  .telephone:focus-visible {
+    animation: none;
+  }
+}
+
+.telephone img {
+  width: 100%;
+  display: block;
+}
+
+/* .contact-texte {
+  max-width: 500px;
+  margin-top: 20px; 
+  color: #ea3c6c;
+  font-size: clamp(3.5rem, 3.5vw, 4rem);
+  line-height: 1.5;
+  rotate: 3deg;
+  margin-left: -30px;
+
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+} */
+
+/* ===== Le titre au-dessus du formulaire ===== */
+.contact-texte {
+  margin: 0;
+  color: var(--noir);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: normal;
+  text-align: center;
+  rotate: -3deg;
+}
+
+/* Variante : modale formulaire (page Contact) */
+.modale--formulaire {
+  position: fixed;
+  z-index: 10;
+  top: 170px;
+  left: 47%;
+  width: min(570px, 38vw);
+  height: auto; /* la carte suit son contenu */
+  max-height: calc(100vh - 200px);
+  padding: 25px 50px 35px;
+  overflow-y: auto;
+}
+
+/* Le téléphone passe devant la carte */
+.telephone {
+  position: relative;
+  z-index: 20;
+}
+
+/* Le formulaire */
+.formulaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulaire label {
+  color: var(--rose);
+  font-size: 1.3rem;
+  margin: 15px 0 6px;
+}
+
+.formulaire input,
+.formulaire textarea {
+  background: transparent;
+  border: 1px solid var(--rose);
+  padding: 10px;
+  font-family: sans-serif; /* lisible pour écrire */
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.formulaire input:focus,
+.formulaire textarea:focus {
+  outline: 2px solid var(--rose);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* On réutilise le bouton glossy */
+.btn-envoyer {
+  color: #111;
+  align-self: center;
+  margin-top: 30px;
+  font-family: inherit; /* un <button> n'hérite pas de la police */
+  cursor: pointer;
+}
+
+/* ===== Pop-up de confirmation ===== */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  z-index: 30; /* au-dessus de la modale et du téléphone */
+  translate: -50% 20px; /* centré, et un peu plus bas au départ */
+  padding: 15px 30px;
+  background: var(--jaune);
+  border: 2px solid var(--rose);
+  border-radius: 12px;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15);
+  font-size: 1.3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    translate 0.4s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  translate: -50% 0; /* elle remonte en apparaissant */
+}
+
+/* ===== Page Temps liés ===== */
+.temps-lies {
+  display: block; /* annule le flex du main de base */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 120px;
+}
+
+.temps-titre {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: normal;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.frise {
+  list-style: none; /* pas de numéros */
+}
+
+.carte {
+  position: relative; /* repère pour placer l'icône */
+  width: min(380px, 90%);
+  margin-top: 90px; /* laisse de la place à l'icône au-dessus */
+  padding: 25px;
+  border: 1.5px solid var(--rose);
+  border-radius: 12px;
+  background: #f6d860; /* un jaune un peu plus soutenu que le fond */
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* L'objet posé sur le coin de la carte */
+.carte-icone {
+  position: absolute;
+  top: -75px;
+  left: -25px;
+  width: 110px;
+  rotate: -6deg;
+}
+
+/* ===== Page d'accueil ===== */
+.accueil {
+  display: block; /* les sections s'empilent */
+  padding: 0; /* la section jaune clair va d'un bord à l'autre */
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px 60px;
+}
+
+/* Section "c'est quoi" */
+.quoi {
+  position: relative;
+  background: #fbe68f; /* jaune plus clair */
+  padding: 60px 20px 120px;
+  /* fine ombre en haut et en bas, comme sur la maquette */
+  box-shadow:
+    inset 0 10px 12px -10px rgba(0, 0, 0, 0.25),
+    inset 0 -10px 12px -10px rgba(0, 0, 0, 0.25);
+}
+
+.quoi-titre {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: normal;
+  font-size: 2.5rem;
+  text-align: center;
+  rotate: -3deg;
+}
+
+.quoi-point {
+  display: inline-block; /* nécessaire pour pouvoir le faire tourner */
+  margin-left: 20px;
+  width: 80px;
+  height: 80px;
+  rotate: 15deg;
+}

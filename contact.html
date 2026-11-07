@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <title>Take Five – Studio de coaching</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="css/commun.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+
+    <!-- HAUT : logo + menu + bouton contact -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Take Five – accueil">
+        </a>
+
+        <nav class="nav" id="menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="accompagnement.html">L'accompagnement</a></li>
+                <li><a href="qui-suis-je.html">Qui suis-je</a></li>
+                <li class="nav-contact"><a href="contact.html" class="btn-contact">contact</a></li>
+            </ul>
+        </nav>
+
+        <a href="contact.html" class="btn-contact">contact</a>
+
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main class="contact">
+        <div class="contact-gauche">
+            <h1 class="contact-titre">On prend<br>rendez-vous ?</h1>
+
+            <button class="telephone" aria-label="Ouvrir le formulaire de contact">
+                <img src="images/phone.png" alt="">
+            </button>
+        </div>
+
+        <p class="contact-texte">
+            Un premier échange téléphonique gratuit nous permettra de faire connaissance.
+        </p>
+    </main>
+
+    <dialog id="modale-contact" class="modale modale--formulaire">
+        <button class="modale-fermer" aria-label="Fermer">×</button>
+
+        <!-- <form class="formulaire" action="#" method="POST">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" autocomplete="family-name" required>
+
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn-contact btn-envoyer">Envoyer</button>
+        </form> -->
+
+
+
+        <form class="formulaire" action="https://api.web3forms.com/submit" method="POST">
+            <!-- Réglages Web3Forms (invisibles) -->
+            <input type="hidden" name="access_key" value="8ae7e8e4-6242-4178-ada9-24dafa9530ea">
+            <input type="hidden" name="subject" value="Nouveau message depuis le site Take Five">
+
+            <!-- ...nos champs, sans changement... -->
+
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn-contact btn-envoyer">Envoyer</button>
+        </form>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+
+
+
+    <!-- BAS : réseaux sociaux -->
+    <footer class="footer">
+        <a href="https://www.instagram.com/alexandra_bannelier/" target="_blank"><img src="images/instagram.png"
+                alt="Instagram"></a>
+        <a href="https://www.linkedin.com/in/alexandra-bannelier-7628196/" target="_blank"><img
+                src="images/linkedin.png" alt="LinkedIn"></a>
+        <!-- <a href="mailto:adresse@exemple.fr"><img src="images/mail.png" class="mail" alt="Envoyer un e-mail"></a> -->
+        <a href="mailto:bonjour@takefivecoaching.fr" class="lien-mail">
+        <img src="images/mail.png" alt="Envoyer un e-mail" class="mail">
+        <span class="bulle">bonjour@takefivecoaching.fr</span>
+        </a>
+    </footer>
+
+    <!-- Décoration : le vinyle en bas à droite -->
+    <img src="images/vinyle.png" class="vinyle" alt="">
+    <script src="script/menu.js"></script>
+    <script src="script/parallax.js"></script>
+    <script src="script/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,439 @@
+/* =========================================================
+   COMMUN.CSS : tout ce qui sert sur plusieurs pages
+   ========================================================= */
+
+/* ===== 1. Nos couleurs (variables) ===== */
+:root {
+  --jaune: #f7e16b;
+  --rose: #d94c6e;
+  --noir: #111;
+}
+
+/* ===== 2. Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--jaune);
+  font-family: "Gochi Hand", cursive;
+  color: var(--noir);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 0px 20px;
+}
+
+/* Texte invisible à l'écran, mais lu par Google et les lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ===== 3. Header : logo | menu | contact ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 50px;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav a {
+  color: var(--noir);
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.nav a.active,
+.nav a:hover {
+  border-bottom: 2px solid var(--rose);
+}
+
+/* ===== 4. Bouton contact (glossy) ===== */
+
+/* 1. État normal */
+.btn-contact {
+  position: relative;
+  overflow: hidden;
+  color: rgb(244, 213, 218);
+  text-decoration: none;
+  font-size: 1.6rem;
+  padding: 12px 60px;
+  border: 2px solid #e0557f;
+  border-radius: 12px;
+  background:
+    /* lueur violette en bas au centre */
+    radial-gradient(
+      ellipse 40% 35% at 50% 100%,
+      rgba(230, 120, 255, 0.9),
+      transparent
+    ),
+    /* dégradé rose du haut vers le bas */
+    linear-gradient(to bottom, #f78fb0, #ee6a98 45%, #e8336b 85%, #f06aa0);
+  box-shadow: 0 6px 0 #a8324f; /* épaisseur pour l'effet "appui" */
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+/* 2. Reflet "pilule" en haut */
+.btn-contact::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4%;
+  right: 4%;
+  height: 42%;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.15)
+  );
+  pointer-events: none;
+}
+
+/* 3. Au clic : le bouton s'enfonce */
+.btn-contact:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #a8324f;
+}
+
+/* ===== 5. Footer : icônes en bas à gauche ===== */
+.footer {
+  position: fixed;
+  bottom: 30px;
+  left: 50px;
+  display: flex;
+}
+
+.footer a {
+  display: block;
+}
+
+.footer img {
+  display: block;
+  width: 45px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.footer a:hover img,
+.footer a:focus-visible img {
+  transform: translateY(-6px) scale(1.15);
+}
+
+.footer .mail {
+  padding-top: 5px;
+  width: 40px;
+}
+
+/* Bulle avec l'adresse mail */
+.lien-mail {
+  position: relative; /* la bulle se place par rapport au lien */
+}
+
+.bulle {
+  position: absolute;
+  bottom: 120%; /* au-dessus de l'icône */
+  left: 0;
+  background: white;
+  color: var(--noir);
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap; /* l'adresse reste sur une seule ligne */
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
+}
+
+.lien-mail:hover .bulle,
+.lien-mail:focus-visible .bulle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 6. Vinyle qui tourne en bas à droite ===== */
+.vinyle {
+  position: fixed;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  animation: tourner 6s linear infinite;
+}
+
+@keyframes tourner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Si la personne a demandé moins d'animations dans son système */
+@media (prefers-reduced-motion: reduce) {
+  .vinyle {
+    animation: none;
+  }
+}
+
+/* ===== 7. Modale (base commune à toutes les pages) ===== */
+.modale {
+  top: 120px; /* sous le header */
+  left: 14%;
+  margin: 0; /* annule le centrage par défaut de <dialog> */
+  width: min(680px, 46vw);
+  height: calc(100vh - 190px);
+  max-width: none;
+  max-height: none;
+  padding: 35px 40px;
+  border: 1.5px solid var(--rose);
+  border-radius: 16px;
+  background: var(--jaune); /* opaque : cache ce qu'il y a derrière */
+  color: var(--noir);
+  box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* display seulement quand elle est ouverte ! */
+.modale[open] {
+  display: flex;
+  flex-direction: column;
+  animation: apparition 0.4s ease;
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.modale::backdrop {
+  background: transparent; /* on voit la page derrière */
+}
+
+.modale-titre {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: normal;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Seul le texte défile */
+.modale-texte {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.modale-texte p,
+.modale-texte ul {
+  margin-bottom: 1.2em;
+}
+
+.modale-texte ul {
+  list-style: none;
+}
+
+/* Bouton fermer */
+.modale-fermer {
+  position: absolute; /* dans le coin de la carte */
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--noir);
+  transition: rotate 0.3s ease;
+}
+
+.modale-fermer:hover {
+  rotate: 90deg;
+}
+
+/* ===== 8. Frise (Accueil + Temps liés) ===== */
+.frise {
+  list-style: none; /* pas de numéros */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carte {
+  position: relative; /* repère pour placer l'icône */
+  width: min(380px, 90%);
+  margin-top: 90px; /* laisse de la place à l'icône au-dessus */
+  padding: 25px;
+  border: 1.5px solid black;
+  border-radius: 12px;
+  background: #f6d86032; /* un jaune un peu plus soutenu que le fond */
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* L'objet posé sur le coin de la carte */
+.carte-icone {
+  position: absolute;
+  top: -75px;
+  left: -25px;
+  width: 110px;
+  rotate: -6deg;
+}
+
+/* ===== RESPONSIVE : menu burger ===== */
+.burger {
+  display: none; /* caché sur grand écran */
+}
+.nav-contact {
+  display: none; /* caché sur grand écran */
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 20px;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  /* Le burger : 3 barres */
+  .burger {
+    position: relative;
+    z-index: 50; /* reste au-dessus du menu ouvert */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .burger span {
+    width: 30px;
+    height: 3px;
+    background: var(--noir);
+    border-radius: 2px;
+    transition:
+      translate 0.3s ease,
+      rotate 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  /* Ouvert : les 3 barres forment une croix */
+  .burger[aria-expanded="true"] span:nth-child(1) {
+    translate: 0 9px;
+    rotate: 45deg;
+  }
+  .burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger[aria-expanded="true"] span:nth-child(3) {
+    translate: 0 -9px;
+    rotate: -45deg;
+  }
+
+  /* Le menu : plein écran, caché à droite */
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--jaune);
+    translate: 100% 0; /* hors de l'écran */
+    visibility: hidden;
+    transition:
+      translate 0.4s ease,
+      visibility 0.4s;
+  }
+
+  .nav.ouvert {
+    translate: 0 0; /* il glisse dans l'écran */
+    visibility: visible;
+  }
+  .nav-contact {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .nav a {
+    font-size: 2.2rem;
+  }
+
+.header > .btn-contact {
+  display: none;
+}
+
+.nav .btn-contact,
+.nav .btn-contact:hover {
+  color: rgb(244, 213, 218);
+  font-size: 1.8rem;
+  padding: 10px 50px;
+  border-bottom: 2px solid #e0557f;
+}
+}
+
+/* ===== RESPONSIVE : footer et vinyle ===== */
+@media (max-width: 600px) {
+  .footer {
+    bottom: 15px;
+    left: 15px;
+  }
+
+  .footer img {
+    width: 30px;
+  }
+
+  .footer .mail {
+    width: 27px;
+  }
+
+  .vinyle {
+    width: 110px;
+    bottom: -35px;
+    right: -35px;
+  }
+}

@@ -1,0 +1,197 @@
+/* =========================================================
+   CONTACT.CSS
+   ========================================================= */
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 3% 60px;
+}
+
+.contact-titre {
+  font-size: clamp(0.5rem, 2.5vw, 4rem);
+  font-weight: normal;
+  line-height: 1.1;
+  rotate: -8deg;
+  margin-bottom: 10px;
+  margin-left: 120px;
+}
+
+/* ===== Le téléphone (bouton qui ouvre la modale) ===== */
+.telephone {
+  position: relative;
+  z-index: 20; /* passe devant la carte du formulaire */
+  display: block;
+  width: clamp(300px, 35vw, 520px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.telephone img {
+  width: 100%;
+  display: block;
+}
+
+/* Le téléphone "sonne" au survol */
+@keyframes sonner {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -3deg;
+  }
+  75% {
+    rotate: 3deg;
+  }
+}
+
+.telephone:hover,
+.telephone:focus-visible {
+  scale: 1.05;
+  animation: sonner 0.15s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telephone:hover,
+  .telephone:focus-visible {
+    animation: none;
+  }
+}
+
+/* ===== Le texte rose ===== */
+.contact-texte {
+  max-width: 500px;
+  /* margin-top: 20px;
+  margin-left: -30px; */
+  margin: 0; /* remplace margin-top et margin-left */
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem); /* plus petit qu'avant */
+  color: #ea3c6c;
+  font-size: clamp(3.5rem, 3.5vw, 4rem);
+  line-height: 1.5;
+  rotate: 3deg;
+  /* parallax, en sens inverse */
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+/* ===== Variante : modale formulaire ===== */
+.modale--formulaire {
+  position: fixed;
+  z-index: 10;
+  top: 170px;
+  left: 47%;
+  width: min(570px, 38vw);
+  height: auto; /* la carte suit son contenu */
+  max-height: calc(100vh - 200px);
+  padding: 25px 50px 35px;
+  overflow-y: auto;
+}
+
+/* ===== Variante : modale "suite du message" ===== */
+.modale--message {
+  position: fixed;
+  z-index: 10;
+  top: 170px;
+  left: 47%;
+  width: min(500px, 38vw);
+  height: auto;
+  max-height: calc(100vh - 200px);
+  padding: 35px 40px;
+}
+
+/* ===== Le formulaire ===== */
+.formulaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulaire label {
+  color: var(--rose);
+  font-size: 1.3rem;
+  margin: 15px 0 6px;
+}
+
+.formulaire input,
+.formulaire textarea {
+  background: transparent;
+  border: 1px solid var(--rose);
+  padding: 10px;
+  font-family: sans-serif; /* lisible pour écrire */
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.formulaire input:focus,
+.formulaire textarea:focus {
+  outline: 2px solid var(--rose);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* On réutilise le bouton glossy */
+.btn-envoyer {
+  color: #111;
+  align-self: center;
+  margin-top: 30px;
+  font-family: inherit; /* un <button> n'hérite pas de la police */
+  cursor: pointer;
+}
+
+/* ===== Pop-up de confirmation ===== */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  z-index: 30; /* au-dessus de la modale et du téléphone */
+  translate: -50% 20px; /* centré, et un peu plus bas au départ */
+  padding: 15px 30px;
+  background: var(--jaune);
+  border: 2px solid var(--rose);
+  border-radius: 12px;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15);
+  font-size: 1.3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    translate 0.4s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  translate: -50% 0; /* elle remonte en apparaissant */
+}
+
+/* ===== Colonne droite : message + formulaire ===== */
+.contact-droite {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: min(570px, 42vw);
+}
+
+/* Le formulaire devient une carte */
+/* .formulaire {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 40px 35px;
+  border: 1.5px solid var(--rose);
+  border-radius: 16px;
+  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.15);
+} */
+ /* Le message complet, en rose */
+.modale-message {
+  color: var(--rose);
+  font-size: 1.8rem;
+  line-height: 1.5;
+}

@@ -1,0 +1,230 @@
+/* =========================================================
+   CONTACT.CSS
+   ========================================================= */
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 3% 60px;
+}
+
+.contact-titre {
+  font-size: clamp(2rem, 2.5vw, 4rem);
+  font-weight: normal;
+  line-height: 1.1;
+  rotate: -8deg;
+  margin-bottom: 10px;
+  margin-left: 120px;
+}
+
+/* ===== Le téléphone (bouton qui ouvre la modale) ===== */
+.telephone {
+  position: relative;
+  z-index: 20; /* passe devant la carte du formulaire */
+  display: block;
+  width: clamp(300px, 35vw, 520px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.telephone img {
+  width: 100%;
+  display: block;
+}
+
+/* La sonnerie (utilisée au survol) */
+@keyframes sonner {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -3deg;
+  }
+  75% {
+    rotate: 3deg;
+  }
+}
+
+/* Survol : seulement avec une vraie souris (évite le "hover collant" sur mobile) */
+@media (hover: hover) {
+  .telephone:hover,
+  .telephone:focus-visible {
+    scale: 1.05;
+    animation: sonner 0.15s linear infinite;
+  }
+}
+
+/* Écrans tactiles : le téléphone sonne 2 fois pour dire "touche-moi" */
+/* Écrans tactiles : le téléphone sonne de temps en temps */
+@keyframes appel-telephone {
+  0%, 25%, 100% { rotate: 0deg; }
+  3%, 11%, 19%  { rotate: -6deg; }
+  7%, 15%, 23%  { rotate: 6deg; }
+}
+
+@media (hover: none) {
+  .telephone {
+    animation: appel-telephone 5s linear 1s infinite;
+  }
+}
+
+
+/* Moins d'animations demandé : on coupe tout */
+@media (prefers-reduced-motion: reduce) {
+  .telephone,
+  .telephone:hover,
+  .telephone:focus-visible {
+    animation: none;
+  }
+}
+
+/* ===== Le texte rose ===== */
+.contact-texte {
+  max-width: 500px;
+  margin: 0;
+  color: #ea3c6c;
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  line-height: 1.5;
+  rotate: 3deg;
+  /* parallax, en sens inverse */
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+/* ===== Variante : modale formulaire ===== */
+.modale--formulaire {
+  position: fixed;
+  z-index: 10;
+  top: 170px;
+  left: 47%;
+  width: min(570px, 38vw);
+  height: auto; /* la carte suit son contenu */
+  max-height: calc(100vh - 200px);
+  padding: 25px 50px 35px;
+  overflow-y: auto;
+}
+
+/* ===== Le formulaire ===== */
+.formulaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulaire label {
+  color: var(--rose);
+  font-size: 1.3rem;
+  margin: 15px 0 6px;
+}
+
+.formulaire input,
+.formulaire textarea {
+  background: transparent;
+  border: 1px solid var(--rose);
+  padding: 10px;
+  font-family: sans-serif; /* lisible pour écrire */
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.formulaire input:focus,
+.formulaire textarea:focus {
+  outline: 2px solid var(--rose);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* On réutilise le bouton glossy */
+.btn-envoyer {
+  color: #111;
+  align-self: center;
+  margin-top: 30px;
+  font-family: inherit; /* un <button> n'hérite pas de la police */
+  cursor: pointer;
+}
+
+/* ===== Pop-up de confirmation ===== */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  z-index: 40; /* au-dessus de tout */
+  translate: -50% 20px; /* centré, et un peu plus bas au départ */
+  padding: 15px 30px;
+  background: var(--jaune);
+  border: 2px solid var(--rose);
+  border-radius: 12px;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15);
+  font-size: 1.3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    translate 0.4s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  translate: -50% 0; /* elle remonte en apparaissant */
+}
+
+/* ===== RESPONSIVE : contact ===== */
+@media (max-width: 900px) {
+  .contact {
+    flex-direction: column; /* titre + téléphone, puis le texte rose */
+    padding: 30px 6% 120px;
+    overflow-x: clip;
+  }
+
+  .contact-titre {
+    margin-left: 0; /* annule le décalage de l'ordinateur */
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    text-align: center;
+  }
+
+  .telephone {
+    width: min(400px, 80vw);
+    margin: 0 auto;
+  }
+
+  .contact-texte {
+    font-size: clamp(1.8rem, 6.5vw, 2.6rem);
+    text-align: center;
+    rotate: -2deg;
+  }
+
+  /* La modale du formulaire prend presque tout l'écran */
+  .modale--formulaire {
+    z-index: 30; /* passe DEVANT le téléphone sur mobile */
+    top: 90px;
+    left: 5%;
+    width: 90%;
+    max-height: calc(100vh - 120px);
+    padding: 40px 20px 25px;
+  }
+
+  .formulaire label {
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+
+  .formulaire input,
+  .formulaire textarea {
+    font-size: 16px; /* évite le zoom automatique sur iPhone */
+  }
+
+  .toast {
+    width: 90%;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+}

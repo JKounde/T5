@@ -1,0 +1,170 @@
+/* =========================================================
+   QUI-SUIS-JE.CSS
+   ========================================================= */
+
+.qui-suis-je {
+  display: flex;
+  justify-content: center; /* télé + texte regroupés au centre */
+  align-items: center;
+  padding: 0 3% 40px;
+}
+
+/* ===== La télé (bouton qui ouvre la modale) ===== */
+.tele {
+  position: relative; /* z-index a besoin d'un position */
+  z-index: 20; /* plus grand que la modale : la télé passe devant */
+  width: clamp(300px, 40vw, 600px);
+  margin-top: -60px;
+  margin-right: -55px;
+  rotate: -4deg;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* parallax */
+  transform: translate(calc(var(--x, 0) * 40px), calc(var(--y, 0) * 40px));
+  transition:
+    transform 0.2s ease-out,
+    scale 0.3s ease;
+  will-change: transform;
+}
+
+.tele img {
+  width: 100%;
+  display: block;
+}
+
+/* Vibration autour de -4deg */
+@keyframes vibrer-tele {
+  0%,
+  100% {
+    rotate: -4deg;
+  }
+  25% {
+    rotate: -8deg;
+  }
+  75% {
+    rotate: 0deg;
+  }
+}
+
+.tele:hover,
+.tele:focus-visible {
+  scale: 1.06;
+  animation: vibrer-tele 0.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tele:hover,
+  .tele:focus-visible {
+    animation: none;
+  }
+}
+
+/* ===== La citation ===== */
+.citation {
+  max-width: 600px;
+  text-align: center;
+  /* parallax, en sens inverse */
+  transform: translate(calc(var(--x, 0) * -15px), calc(var(--y, 0) * -15px));
+  transition: transform 0.2s ease-out;
+}
+
+.citation blockquote {
+  color: var(--rose);
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  line-height: 1.4;
+}
+
+.citation figcaption {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  margin-top: 20px;
+}
+
+/* ===== Variante : modale à droite ===== */
+.modale--droite {
+  position: fixed; /* reste à sa place même si on scrolle */
+  z-index: 10;
+  left: auto; /* annule le left: 14% */
+  right: 5%;
+  top: 150px;
+  width: min(730px, 48vw);
+  height: auto; /* la hauteur suit le contenu */
+  max-height: calc(100vh - 220px); /* mais ne dépasse jamais l'écran */
+  padding: 50px 35px 30px;
+  overflow: visible; /* sinon le titre sur la bordure serait coupé */
+}
+
+/* Titre posé sur la bordure */
+.modale--droite .modale-titre {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0 15px;
+  background: var(--jaune); /* cache la bordure derrière lui */
+  font-size: 2.6rem;
+  white-space: nowrap;
+}
+
+.modale--droite .modale-texte {
+  min-height: 0; /* permet au texte de défiler si besoin */
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* ===== RESPONSIVE : qui suis-je ===== */
+@media (max-width: 900px) {
+  .qui-suis-je {
+    flex-direction: column;     /* la télé au-dessus, la citation en dessous */
+    padding: 20px 6% 120px;
+    overflow-x: clip;
+  }
+
+  .tele {
+    width: min(450px, 85vw);
+    margin: 0;                  /* annule les marges négatives de l'ordinateur */
+  }
+
+  .citation blockquote {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .citation figcaption {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+
+  /* La modale prend presque tout l'écran */
+  .modale--droite {
+    z-index: 30;                /* passe DEVANT la télé sur mobile */
+    top: 110px;
+    left: 5%;
+    right: auto;
+    width: 90%;
+    max-height: calc(100vh - 160px);
+    padding: 40px 20px 25px;
+  }
+
+  .modale--droite .modale-titre {
+    font-size: 2rem;
+  }
+
+  .modale--droite .modale-texte {
+    font-size: 1rem;
+  }
+}
+/* ===== Écrans tactiles : la télé vibre toute seule ===== */
+@keyframes appel-tele {
+  0%, 20%, 100% { rotate: -4deg; }   /* immobile la plupart du temps */
+  5%            { rotate: -8deg; }
+  10%           { rotate: 0deg; }
+  15%           { rotate: -8deg; }
+}
+
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .tele {
+    /* animation: appel-tele 3s ease-in-out infinite; */
+    animation: appel-tele 3s ease-in-out 1s 2;
+  }
+}

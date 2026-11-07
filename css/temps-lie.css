@@ -1,0 +1,25 @@
+/* =========================================================
+   TEMPS-LIES.CSS
+   (la frise et les cartes sont dans commun.css)
+   ========================================================= */
+
+.temps-lies {
+  display: block; /* annule le flex du main de base */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 120px;
+}
+
+.temps-titre {
+
+  font-family: "Anton", sans-serif;
+
+  font-weight: normal;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Une carte sur deux part à droite : le zigzag */
+.carte:nth-child(even) {
+  margin-left: auto;
+}

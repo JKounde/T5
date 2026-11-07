@@ -1,0 +1,175 @@
+/* =========================================================
+   ACCUEIL.CSS
+   ========================================================= */
+
+.accueil {
+  display: block; /* les sections s'empilent */
+  padding: 0; /* la section jaune clair va d'un bord à l'autre */
+}
+
+/* ===== Section 1 : la bannière ===== */
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px 130px;
+}
+
+.banniere {
+  width: 65%;
+  max-width: 1150px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 11px 0px rgba(128, 128, 128, 0.463);
+}
+
+/* ===== Section 2 : Take Five c'est quoi ? ===== */
+.quoi {
+  position: relative;
+  background: #fbe68f; /* jaune plus clair */
+  padding: 60px 20px 120px;
+  padding-bottom: 40vh;
+  /* fine ombre en haut et en bas */
+  box-shadow:
+    inset 0 10px 12px -10px rgba(0, 0, 0, 0.25),
+    inset 0 -10px 12px -10px rgba(0, 0, 0, 0.25);
+}
+
+.quoi-titre {
+  font-family: "Gochi Hand", cursive;
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+  rotate: -3deg;
+}
+
+.quoi-point {
+  display: inline-block; /* nécessaire pour pouvoir le faire tourner */
+  margin-top: 50px;
+  margin-left: 20px;
+  width: 130px;
+  height: 130px;
+  rotate: 15deg;
+  vertical-align: middle;
+  translate: 0 -25px; /* 20px plus bas ; on augmente pour descendre encore */
+}
+/* Une carte sur deux part à droite : le zigzag */
+.carte:nth-child(even) {
+  margin-left: auto;
+}
+
+/* Réglages propres à chaque icône */
+.icone-tasse {
+  top: -45px; /* moins négatif = plus bas */
+}
+
+.icone-journal {
+  top: -40px;
+  left: -40px;
+  width: 130px;
+}
+
+.icone-loupe {
+  top: -60px;
+  left: -40px;
+  width: 120px;
+  rotate: 110deg;
+}
+
+.icone-on-air {
+  top: -80px;
+  left: -40px;
+  width: 120px;
+}
+
+/* Le projecteur est posé à côté de la carte, pas au-dessus */
+.icone-projecteur {
+  top: -70px;
+  left: -100px;
+  width: 150px;
+  rotate: 0deg;
+}
+
+/* Le ? qui voyage */
+.voyageur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 80px;
+  rotate: 15deg;
+  pointer-events: none;
+  /* le saut avec un petit rebond */
+  transition: translate 0.8s cubic-bezier(0.5, -0.3, 0.3, 1.3);
+}
+
+/* La carte où se trouve le ? s'allume */
+.quoi .carte {
+  transition:
+    scale 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.quoi .carte.active {
+  scale: 1.04;
+  box-shadow: 12px 12px 22px rgba(0, 0, 0, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voyageur {
+    transition: none;
+  }
+}
+/* ===== RESPONSIVE : accueil ===== */
+@media (max-width: 900px) {
+  .banniere {
+    margin-top: 100px;
+    width: 90%;
+    border-radius: 25px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 20px 15px 350px;
+  }
+
+  .banniere {
+    width: 100%;          /* toute la largeur sur téléphone */
+    border-radius: 18px;
+  }
+
+  .quoi {
+    padding: 40px 15px 120px;
+  }
+
+  .quoi-titre {
+    font-size: 2.2rem;
+  }
+
+  .voyageur {
+    width: 50px;
+  }
+
+
+  /* Les cartes centrées, sans zigzag */
+  .quoi .carte,
+  .quoi .carte:nth-child(even) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;   /* auto des deux côtés = centré */
+    margin-top: 80px;
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  /* Les icônes restent dans l'écran */
+  .quoi .carte-icone {
+    left: -10px;
+    width: 85px;
+  }
+
+  /* Rien ne doit dépasser sur les côtés */
+  .quoi {
+    overflow-x: clip;
+  }
+}
